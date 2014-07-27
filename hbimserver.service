@@ -1,0 +1,12 @@
+[Unit]
+Description=HBIM-Server
+After=syslog.target network.target
+
+[Service]
+Type=forking
+PIDFile=/run/hbimserver.pid
+ExecStart=/usr/bin/python /home/hbimserver/hbimserver.py
+ExecStop=kill $(</run/hbimserver.pid)
+
+[Install]
+WantedBy=multi-user.target

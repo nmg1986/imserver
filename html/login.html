@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>中国海关即时消息系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+<link type="text/css" rel="stylesheet" href="css/base.css" />
+<script type="text/javascript" src="cryptojs/components/md5-min.js"></script>
+<script type="text/javascript" src="cryptojs/rollups/md5.js"></script>
+<script type="text/javascript">
+/*String.prototype.trim=function() {
+     return this.replace(/(^\s*)(\s*$)/g, '');
+}*/
+function chkform() {
+	var form = document.getElementById('form');
+    if(form.admin.value.trim() == "") { 
+      document.getElementById('errstr').innerText = '请输入管理员帐号';   
+      return false; 
+    } 
+	if(form.pwd.value.trim() == "") {
+      document.getElementById('errstr').innerText = '请输入登录密码'; 
+      return false; 
+    } 
+	var md5Value = CryptoJS.MD5(form.pwd.value.trim());
+	md5Value = md5Value.toUpperCase();
+    alert(md5Value);
+	if(md5Value == "") { 
+      alert('登录密码MD5加密出错！'); 
+      return false; 
+    }
+	form.pwd.value = md5Value;
+    return   true; 
+}//chkform
+</script>
+</head>
+<body>
+<style type="text/css">
+    .btn80 {
+            margin:0;
+            padding:2px;
+            width:80px;
+            height:24px;
+            border:none;
+            font-size:13px;
+            font-weight:bold;
+            color:#ffffff;
+            background-color:#4F8EC4;
+            cursor:pointer;
+    }
+</style>
+<div style="clear:both;margin:120px auto;padding:0;width:400px;height:280px;background:transparent no-repeat;border: 1px #4F8EC4 solid;">
+	<div style="margin:0px 0px 0 0px;padding:8px 6px 0 6px;width:388px;height:22px;font-size:13px;color:#ffffff;background-color:#4F8EC4;">
+		<div style="float:left;margin:0;padding:0;font-weight:bold;">中国海关即时消息系统</div>
+		<div style="float:right;margin:0;padding:0;">Version:1.0.0.0</div>
+	</div>
+	<!--<form action="login.py" method="post" id="form" onSubmit="return chkform();">-->
+    <form method="post" id="form" onSubmit="return chkform();">
+	<input type="hidden" name="pwd" value=""/>
+	<ul style="margin:0;padding:20px 0 0 0;width:400px;list-style:none;font-size:13px;color:#8a8a8a;">
+		<li style="padding:10px 0 0 110px;height:10px;">管理员帐号：</li>
+		<li style="padding:10px 0 0 110px;height:30px;"><input style="width:180px;font-size:13px;" type="text" name="admin" value=""></li>
+		<li style="padding:10px 0 0 110px;height:10px;;">登录密码：</li>
+		<li style="padding:10px 0 0 110px;height:30px;"><input style="width:180px;font-size:13px;" type="password" name="pwd" value=""></li>
+		<li id="errstr" style="padding:5px 0 0 110px;height:15px;font-size:13px;color:#ff0000;"></li>
+		<li style="padding:15px 0 0 0;text-align:center;"><input class="btn80" type="submit" value="登录"></li>
+	</ul>
+	</form>
+</div>
+</body>
+</html>
